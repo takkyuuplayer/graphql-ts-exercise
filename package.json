@@ -1,0 +1,21 @@
+{
+  "name": "graphql-js-exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "takkyuuplayer <takkyuuplayer@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write --ignore-path .gitignore {src,.}/{*.ts,*.js}",
+    "lint": "tslint --project tsconfig.json {src,test}/**/*.ts && prettier-check --ignore-path .gitignore {src,.}/{*.ts,*.js}",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "jest": "^23.6.0",
+    "prettier": "^1.16.1",
+    "prettier-check": "^2.0.0",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  }
+}
