@@ -4,6 +4,6 @@
 
 GraphQL backend server exercise with TypeScript.
 
-# References
+## References
 
 * [Building a GraphQL Server with Node\.js & Prisma Tutorial](https://www.howtographql.com/graphql-js/0-introduction/)
