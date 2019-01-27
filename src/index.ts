@@ -1,45 +1,65 @@
 import { GraphQLServer } from "graphql-yoga";
+import _ from "lodash";
+import { ulid } from "ulid";
 
 interface ILink {
-  id: string;
+  id?: string;
   description: string;
   url: string;
 }
-const links: ILink[] = [
+let links: ILink[] = [
   {
     description: "Fullstack tutorial for GraphQL",
-    id: "link-0",
+    id: ulid(),
     url: "www.howtographql.com",
   },
 ];
 
-const typeDefs = `
-type Query {
-  info: String!
-  feed: [Link!]!
-}
-
-type Link {
-  id: ID!
-  description: String!
-  url: String!
-}
-`;
-
 const resolvers = {
-  Link: {
-    description: (parent: ILink) => parent.description,
-    id: (parent: ILink) => parent.id,
-    url: (parent: ILink) => parent.url,
+  Mutation: {
+    post: (parent: any, args: ILink): ILink => {
+      const link: ILink = {
+        description: args.description,
+        id: ulid(),
+        url: args.url,
+      };
+      links = [...links, link];
+      return link;
+    },
+    updateLink: (parent: any, args: ILink): ILink | null => {
+      const link = _.find(links, (el) => (el.id = args.id)) as ILink | null;
+      if (link === void 0) {
+        return null;
+      }
+      links = links.map((l) =>
+        l === link
+          ? { id: l.id, description: args.description, url: args.url }
+          : l,
+      );
+
+      return link;
+    },
+    deleteLink: (parent: any, args: ILink): ILink | null => {
+      const link = _.find(links, (el) => (el.id = args.id)) as ILink | null;
+      if (link === void 0) {
+        return null;
+      }
+      links = links.filter((l) => l !== link);
+
+      return link;
+    },
   },
   Query: {
     feed: () => links,
     info: () => `This is the API of a hackernews Clone`,
+    link: (parent: any, args: ILink) => {
+      return _.find(links, (el) => (el.id = args.id)) as ILink | null;
+    },
   },
 };
 
 const server = new GraphQLServer({
   resolvers,
-  typeDefs,
+  typeDefs: "./src/schema.graphql",
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
