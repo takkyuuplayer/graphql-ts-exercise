@@ -865,4 +865,9 @@ export const models: Model[] = [
  * Type Defs
  */
 
-export const prisma: Prisma;
+export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
+  typeDefs,
+  models,
+  endpoint: `https://us1.prisma.sh/takafumi-sekiguchi/graphql-js-exercise/dev`
+});
+export const prisma = new Prisma();

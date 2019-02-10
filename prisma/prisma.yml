@@ -4,7 +4,7 @@ endpoint: https://us1.prisma.sh/takafumi-sekiguchi/graphql-js-exercise/dev
 datamodel: datamodel.prisma
 
 generate:
-  - generator: javascript-client
+  - generator: typescript-client
     output: ../src/generated/prisma-client
 
 hooks:

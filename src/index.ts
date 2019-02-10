@@ -10,14 +10,14 @@ const server = new GraphQLServer({
     Query,
     Mutation,
     User,
-    Link,
+    Link
   },
   typeDefs: "./src/schema.graphql",
-  context: (request) => {
+  context: request => {
     return {
       ...request,
-      prisma,
+      prisma
     };
-  },
+  }
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
