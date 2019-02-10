@@ -4,6 +4,19 @@ export function info() {
   return `This is the API of a hackernews Clone`;
 }
 
-export function feed(root: any, args: ILink, context: IContext) {
-  return context.prisma.links();
+export async function feed(parent: any, args: any, context: IContext) {
+  const where = args.filter ? {
+    OR: [
+      { description_contains: args.filter },
+      { url_contains: args.filter },
+    ],
+  } : {};
+
+  const links = await context.prisma.links({
+    where,
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy,
+  });
+  return links;
 }
