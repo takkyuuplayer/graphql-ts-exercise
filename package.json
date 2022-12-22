@@ -26,7 +26,7 @@
     "@types/lodash": "^4.14.120",
     "bcrypt": "^3.0.4",
     "graphql-yoga": "^1.17.1",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "prisma": "^1.25.3",
     "prisma-client-lib": "^1.25.3",
     "ts-node": "^8.0.2",
